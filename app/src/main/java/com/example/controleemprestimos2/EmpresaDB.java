@@ -5,5 +5,5 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {Emprestimo.class, Equipamento.class}, version = 1)
 public abstract class EmpresaDB extends RoomDatabase {
-    public abstract EmprestimoDAO emprestimoDAO();
+    public abstract EquipamentoDAO equipamentoDAO();
 }

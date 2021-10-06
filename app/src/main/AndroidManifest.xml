@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ControleEmprestimos2">
         <activity
+            android:name=".GerenciarEquipamento"
+            android:exported="true" />
+        <activity
             android:name=".ListaDeEquipamentos"
             android:exported="true" />
         <activity

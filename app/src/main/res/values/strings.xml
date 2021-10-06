@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Controle de Empréstimos</string>
+    <string-array name="teste">
+        <item>Note 1</item>
+        <item>Note 2</item>
+        <item>Note 3</item>
+        <item>Note 4</item>
+        <item>Note 5</item>
+        <item>Note 6</item>
+        <item>Note 7</item>
+        <item>Note 8</item>
+        <item>Note 9</item>
+        <item>Note 1</item>
+        <item>Note 2</item>
+        <item>Note 3</item>
+        <item>Note 4</item>
+        <item>Note 5</item>
+        <item>Note 6</item>
+        <item>Note 7</item>
+        <item>Note 8</item>
+        <item>Note 9</item>
+    </string-array>
+</resources>

@@ -1,6 +1,7 @@
 package com.example.controleemprestimos2;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -13,5 +14,4 @@ public interface EquipamentoDAO {
 
     @Insert
     void insertAll(Equipamento... equipamentos);
-
 }

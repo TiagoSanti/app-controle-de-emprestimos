@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnEmprestimos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ListaDeEmprestimos.class));
+                //startActivity(new Intent(MainActivity.this, ListaDeEmprestimos.class));
             }
         });
 

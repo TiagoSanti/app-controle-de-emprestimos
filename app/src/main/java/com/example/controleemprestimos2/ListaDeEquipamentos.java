@@ -8,6 +8,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,6 +20,7 @@ public class ListaDeEquipamentos extends AppCompatActivity {
     RecyclerView.Adapter RVAdapter;
 
     FloatingActionButton fabEquipamentos;
+    Button btnVoltar;
     
     //ArrayList<Equipamento> array = new ArrayList<>();
 
@@ -29,6 +31,7 @@ public class ListaDeEquipamentos extends AppCompatActivity {
 
         RV = findViewById(R.id.RVEquipamentos);
         fabEquipamentos = findViewById(R.id.fabEquipamentos);
+        btnVoltar = findViewById(R.id.btnVoltarListaEquip);
 
         /*
         for(int i = 0; i < 10; i++) {
@@ -64,6 +67,13 @@ public class ListaDeEquipamentos extends AppCompatActivity {
 
                 it.putExtras(bundle);
                 startActivity(it);
+            }
+        });
+
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

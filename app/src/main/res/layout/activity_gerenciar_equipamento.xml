@@ -13,6 +13,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="Gerenciar Equipamento"
+        android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,38 +71,38 @@
         android:id="@+id/btnAdicionarSalvar"
         android:layout_width="91dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
         android:background="@color/green"
         android:gravity="center_horizontal|center_vertical"
         android:text="Adicionar"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/btnDeletar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtNumPatrimonio" />
 
     <Button
         android:id="@+id/btnDeletar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
         android:background="@color/red"
         android:gravity="center_horizontal|center_vertical"
         android:text="Deletar"
         android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAdicionarSalvar"
         app:layout_constraintTop_toBottomOf="@+id/edtNumPatrimonio" />
 
     <Button
         android:id="@+id/btnVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="Voltar"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdicionarSalvar" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

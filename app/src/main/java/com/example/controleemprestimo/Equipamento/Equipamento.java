@@ -28,6 +28,9 @@ public class Equipamento {
         this.numPatrimonio = numPatrimonio;
     }
 
+    public Equipamento() {
+    }
+
     public int getIdEquipamento() {
         return idEquipamento;
     }

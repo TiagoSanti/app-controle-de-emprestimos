@@ -26,14 +26,16 @@ public class Emprestimo {
     private String data;
 
     @ColumnInfo(name = "devolvido")
-    private boolean devolvido;
+    private boolean devolvido = false;
 
-    public Emprestimo(int idEquipamento, String nomePessoa, String telefone, String data, boolean devolvido) {
+    public Emprestimo(int idEquipamento, String nomePessoa, String telefone, String data) {
         this.idEquipamento = idEquipamento;
         this.nomePessoa = nomePessoa;
         this.telefone = telefone;
         this.data = data;
-        this.devolvido = devolvido;
+    }
+
+    public Emprestimo(){
     }
 
     public int getIdEmprestimo() {

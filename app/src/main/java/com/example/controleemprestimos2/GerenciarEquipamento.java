@@ -18,9 +18,13 @@ public class GerenciarEquipamento extends AppCompatActivity {
     EditText edtMarca;
     EditText edtModelo;
     EditText edtNumPatrimonio;
+
     Button btnDeletar;
     Button btnAdicionarSalvar;
     Button btnVoltar;
+
+    Emprestimo emprestimo;
+    Equipamento equipamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +73,39 @@ public class GerenciarEquipamento extends AppCompatActivity {
             txtTitleEquipamento.setText("Editar Equipamento");
             btnAdicionarSalvar.setText("Salvar");
 
+            equipamento = db.equipamentoDAO().get(bundle.getInt("idEquipamento"));
 
+            edtNomeEquipamento.setText(equipamento.getNomeEquipamento());
+            edtMarca.setText(equipamento.getMarca());
+            edtModelo.setText(equipamento.getModelo());
+            edtNumPatrimonio.setText(equipamento.getNumPatrimonio());
+
+            btnAdicionarSalvar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    equipamento.setNomeEquipamento(edtNomeEquipamento.getText().toString());
+                    equipamento.setMarca(edtMarca.getText().toString());
+                    equipamento.setModelo(edtModelo.getText().toString());
+                    equipamento.setNumPatrimonio(edtNumPatrimonio.getText().toString());
+
+                    db.equipamentoDAO().update(equipamento);
+                    startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
+                }
+            });
+
+            btnDeletar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    db.equipamentoDAO().delete(equipamento);
+                    startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
+                }
+            });
         }
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
             }
         });
     }

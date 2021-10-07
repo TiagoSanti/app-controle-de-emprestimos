@@ -14,15 +14,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ListaDeEquipamentos extends AppCompatActivity {
+public class ListaDeEquipamentos extends AppCompatActivity implements RVAdapterEquipamento.OnItemListener {
 
     RecyclerView RV;
     RecyclerView.Adapter RVAdapter;
 
     FloatingActionButton fabEquipamentos;
     Button btnVoltar;
-    
-    //ArrayList<Equipamento> array = new ArrayList<>();
+
+    List<Equipamento> equipamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,6 @@ public class ListaDeEquipamentos extends AppCompatActivity {
         fabEquipamentos = findViewById(R.id.fabEquipamentos);
         btnVoltar = findViewById(R.id.btnVoltarListaEquip);
 
-        /*
-        for(int i = 0; i < 10; i++) {
-            Equipamento equipamento = new Equipamento(
-                    "Notebook #"+i,
-                    "Acer",
-                    "H3BX",
-                    "026754");
-            array.add(equipamento);
-        }
-         */
-
         EmpresaDB db = Room.databaseBuilder(
                 getApplicationContext(),
                 EmpresaDB.class,
@@ -51,10 +40,10 @@ public class ListaDeEquipamentos extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        List<Equipamento> equipamentos = db.equipamentoDAO().getAllEquipamentos();
+        equipamentos = db.equipamentoDAO().getAllEquipamentos();
 
         RV.setLayoutManager(new LinearLayoutManager(this));
-        RVAdapter = new RVAdapterEquipamento(equipamentos);
+        RVAdapter = new RVAdapterEquipamento(equipamentos, this);
         RV.setAdapter(RVAdapter);
 
         fabEquipamentos.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +62,23 @@ public class ListaDeEquipamentos extends AppCompatActivity {
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(ListaDeEquipamentos.this, MainActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onItemListener(int position) {
+        Intent it = new Intent(ListaDeEquipamentos.this, GerenciarEquipamento.class);
+        Bundle bundle = new Bundle();
+
+        int idEquipamento = equipamentos.get(position).getIdEquipamento();
+
+        bundle.putInt("idEquipamento", idEquipamento);
+        bundle.putBoolean("adicionar", false);
+
+        it.putExtras(bundle);
+
+        startActivity(it);
     }
 }

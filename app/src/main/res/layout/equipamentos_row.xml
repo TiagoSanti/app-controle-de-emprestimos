@@ -7,6 +7,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/txtIdEquipamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Equipamento #ID"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/txtNomeEquipamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

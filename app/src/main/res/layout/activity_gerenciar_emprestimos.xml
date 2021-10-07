@@ -3,73 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Equipamento.GerenciarEquipamento">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtTitleEquipamento"
+        android:id="@+id/txtTitleEmprestimo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:text="Gerenciar Equipamento"
-        android:textColor="#000000"
+        android:text="Gerenciar Empréstimo"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNomeEquipamento"
+        android:id="@+id/edtNomePessoa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Nome do Equipamento"
+        android:hint="Nome do Prestatário"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleEquipamento" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleEmprestimo" />
 
     <EditText
-        android:id="@+id/edtMarca"
+        android:id="@+id/editTextPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Marca"
-        android:inputType="textPersonName"
+        android:hint="Telefone"
+        android:inputType="phone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNomeEquipamento" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNomePessoa" />
 
     <EditText
-        android:id="@+id/edtModelo"
+        android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Modelo"
-        android:inputType="textPersonName"
+        android:hint="Data"
+        android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtMarca" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
-    <EditText
-        android:id="@+id/edtNumPatrimonio"
+    <Switch
+        android:id="@+id/switchDevolvido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Número de Patrimônio"
-        android:inputType="textPersonName"
+        android:layout_marginTop="30dp"
+        android:text="Devolvido"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtModelo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <Spinner
+        android:id="@+id/spinnerEquipamentos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/txtSpinnerEquipamento"
+        app:layout_constraintTop_toBottomOf="@+id/switchDevolvido" />
+
+    <TextView
+        android:id="@+id/txtSpinnerEquipamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Equipamento: "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchDevolvido" />
 
     <Button
-        android:id="@+id/btnEquipAdicionarSalvar"
-        android:layout_width="91dp"
+        android:id="@+id/btnEmprAdicionarSalvar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
@@ -78,10 +96,10 @@
         android:text="Adicionar"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNumPatrimonio" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSpinnerEquipamento" />
 
     <Button
-        android:id="@+id/btnEquipDeletar"
+        android:id="@+id/btnEmprDeletar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -89,20 +107,18 @@
         android:background="@color/red"
         android:gravity="center_horizontal|center_vertical"
         android:text="Deletar"
-        android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/btnEquipAdicionarSalvar"
-        app:layout_constraintTop_toBottomOf="@+id/edtNumPatrimonio" />
+        app:layout_constraintStart_toEndOf="@+id/btnEmprAdicionarSalvar"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpinnerEquipamento" />
 
     <Button
-        android:id="@+id/btnGerenciarEquipVoltar"
+        android:id="@+id/btnGerenciarEmprVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:gravity="center_horizontal|center_vertical"
         android:text="Voltar"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:textAlignment="center"        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

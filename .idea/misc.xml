@@ -4,13 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_adicionar_equipamento.xml" value="0.3828125" />
-        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_gerenciar_equipamento.xml" value="0.25" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_gerenciar_emprestimo.xml" value="0.3828125" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_gerenciar_emprestimos.xml" value="0.18009118541033434" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_gerenciar_equipamento.xml" value="0.22780797101449277" />
         <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_lista_de_empresitmos.xml" value="0.28804347826086957" />
-        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_lista_de_emprestimos.xml" value="0.371875" />
-        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_lista_de_equipamentos.xml" value="0.25" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_lista_de_emprestimos.xml" value="0.18617021276595744" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_lista_de_equipamentos.xml" value="0.18617021276595744" />
         <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/activity_main.xml" value="0.28804347826086957" />
-        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/emprestimos_row.xml" value="0.346875" />
-        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/equipamentos_row.xml" value="0.371875" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/emprestimos_row.xml" value="0.15" />
+        <entry key="..\:/Documentos/PROG/Android/ControleEmprestimos2/app/src/main/res/layout/equipamentos_row.xml" value="0.18617021276595744" />
       </map>
     </option>
   </component>

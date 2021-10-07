@@ -5,8 +5,6 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -17,11 +15,8 @@ import android.widget.TextView;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Equipamento.Equipamento;
-import com.example.controleemprestimo.Equipamento.GerenciarEquipamento;
 import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 import com.example.controleemprestimo.R;
-
-import org.w3c.dom.Text;
 
 public class GerenciarEmprestimo extends AppCompatActivity {
 
@@ -43,7 +38,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gerenciar_emprestimos);
+        setContentView(R.layout.gerenciar_emprestimos);
 
         txtTitleEmprestimo = findViewById(R.id.txtTitleEmprestimo);
         edtNomePessoa = findViewById(R.id.edtNomePessoa);

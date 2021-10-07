@@ -30,7 +30,7 @@ public class ListaDeEquipamentos extends AppCompatActivity implements RVAdapterE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_de_equipamentos);
+        setContentView(R.layout.lista_de_equipamentos);
 
         RV = findViewById(R.id.RVEquipamentos);
         fabEquipamentos = findViewById(R.id.fabEquipamentos);

@@ -6,7 +6,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.example.controleemprestimos2"
+        applicationId "com.example.controleemprestimos"
         minSdk 21
         targetSdk 30
         versionCode 1

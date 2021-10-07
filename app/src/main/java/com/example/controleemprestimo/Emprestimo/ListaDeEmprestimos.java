@@ -8,14 +8,9 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.example.controleemprestimo.EmpresaDB;
-import com.example.controleemprestimo.Equipamento.GerenciarEquipamento;
-import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
-import com.example.controleemprestimo.Equipamento.RVAdapterEquipamento;
 import com.example.controleemprestimo.MainActivity;
 import com.example.controleemprestimo.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +30,7 @@ public class ListaDeEmprestimos extends AppCompatActivity implements RVAdapterEm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_de_emprestimos);
+        setContentView(R.layout.lista_de_emprestimos);
 
         RV = findViewById(R.id.RVEmprestimos);
         fabEmprestimos = findViewById(R.id.fabEmprestimos);

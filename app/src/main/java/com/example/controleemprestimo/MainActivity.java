@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.controleemprestimo.Emprestimo.ListaDeEmprestimos;
 import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnEmprestimos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MainActivity.this, ListaDeEmprestimos.class));
+                startActivity(new Intent(MainActivity.this, ListaDeEmprestimos.class));
             }
         });
 

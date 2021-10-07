@@ -41,11 +41,11 @@ public class GerenciarEquipamento extends AppCompatActivity {
         edtModelo = findViewById(R.id.edtModelo);
         edtNumPatrimonio = findViewById(R.id.edtNumPatrimonio);
 
-        btnDeletar = findViewById(R.id.btnDeletar);
-        btnAdicionarSalvar = findViewById(R.id.btnAdicionarSalvar);
-        btnVoltar = findViewById(R.id.btnVoltar);
+        btnDeletar = findViewById(R.id.btnEquipDeletar);
+        btnAdicionarSalvar = findViewById(R.id.btnEquipAdicionarSalvar);
+        btnVoltar = findViewById(R.id.btnGerenciarEquipVoltar);
 
-        final EmpresaDB db = Room.databaseBuilder(
+        EmpresaDB db = Room.databaseBuilder(
                 getApplicationContext(),
                 EmpresaDB.class,
                 "EmpresaDB")
@@ -55,11 +55,10 @@ public class GerenciarEquipamento extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         boolean adicionar = bundle.getBoolean("adicionar");
 
-        if (adicionar) {
+        if(adicionar) {
             txtTitleEquipamento.setText("Adicionar Equipamento");
             btnAdicionarSalvar.setText("Adicionar");
             btnDeletar.setVisibility(View.INVISIBLE);
-            btnAdicionarSalvar.setGravity(Gravity.CENTER_HORIZONTAL);
 
             btnAdicionarSalvar.setOnClickListener(new View.OnClickListener() {
                 @Override

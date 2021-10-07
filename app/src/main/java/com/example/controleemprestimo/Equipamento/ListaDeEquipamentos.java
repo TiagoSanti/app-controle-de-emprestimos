@@ -1,4 +1,4 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo.Equipamento;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.controleemprestimo.EmpresaDB;
+import com.example.controleemprestimo.MainActivity;
+import com.example.controleemprestimo.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

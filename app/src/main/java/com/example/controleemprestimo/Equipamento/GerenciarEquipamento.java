@@ -1,4 +1,4 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo.Equipamento;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.controleemprestimo.EmpresaDB;
+import com.example.controleemprestimo.Emprestimo.Emprestimo;
+import com.example.controleemprestimo.R;
 
 public class GerenciarEquipamento extends AppCompatActivity {
 

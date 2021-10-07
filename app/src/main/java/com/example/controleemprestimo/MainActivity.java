@@ -1,4 +1,4 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+
+import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 
 public class MainActivity extends AppCompatActivity {
 

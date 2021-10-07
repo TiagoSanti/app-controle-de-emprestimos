@@ -1,4 +1,4 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo;
 
 import android.content.Context;
 

@@ -1,8 +1,7 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo.Equipamento;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity

@@ -1,9 +1,11 @@
-package com.example.controleemprestimos2;
+package com.example.controleemprestimo.Emprestimo;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.controleemprestimo.Equipamento.Equipamento;
 
 @Entity(foreignKeys = @ForeignKey(entity = Equipamento.class,
                                 parentColumns = "idEquipamento",

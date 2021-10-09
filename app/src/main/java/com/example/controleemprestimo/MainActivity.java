@@ -6,23 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.controleemprestimo.Emprestimo.ListaDeEmprestimos;
 import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button btnEmprestimos;
-    private Button btnEquipamentos;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        btnEmprestimos = findViewById(R.id.btnEmprestimos);
-        btnEquipamentos = findViewById(R.id.btnEquipamentos);
+        Button btnEmprestimos = findViewById(R.id.btnEmprestimos);
+        Button btnEquipamentos = findViewById(R.id.btnEquipamentos);
 
         btnEmprestimos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +33,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ListaDeEquipamentos.class));
             }
         });
-
     }
 }

@@ -2,12 +2,10 @@ package com.example.controleemprestimo.Emprestimo;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +17,6 @@ import android.widget.TextView;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Equipamento.Equipamento;
-import com.example.controleemprestimo.Equipamento.GerenciarEquipamento;
-import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 import com.example.controleemprestimo.R;
 
 import java.util.List;
@@ -41,7 +37,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
     CheckBox checkDevolvido;
     Spinner spinnerEquipamentos;
-    ArrayAdapter adapter;
+    ArrayAdapter<Equipamento> adapter;
 
     Button btnDeletar;
     Button btnAdicionarSalvar;
@@ -69,7 +65,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
         db = EmpresaDB.getDatabase(getApplicationContext());
         equipamentos = db.equipamentoDAO().getAllEquipamentos();
 
-        adapter = new ArrayAdapter(this,
+        adapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 equipamentos);
         spinnerEquipamentos.setAdapter(adapter);
@@ -186,7 +182,6 @@ public class GerenciarEmprestimo extends AppCompatActivity {
     }
 
     public void showAlertDialog(View v, String text) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(GerenciarEmprestimo.this);
 
         builder.setCancelable(true);

@@ -2,7 +2,6 @@ package com.example.controleemprestimo.Equipamento;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Emprestimo.Emprestimo;
@@ -103,6 +101,7 @@ public class GerenciarEquipamento extends AppCompatActivity {
                         showAlertDialog(v);
                     } else {
                         db.equipamentoDAO().delete(equipamento);
+                        startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
                     }
                 }
             });
@@ -117,7 +116,6 @@ public class GerenciarEquipamento extends AppCompatActivity {
     }
 
     public void showAlertDialog(View v) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(GerenciarEquipamento.this);
 
         builder.setCancelable(true);

@@ -93,9 +93,4 @@ public class Emprestimo {
     public void setDevolvido(boolean devolvido) {
         this.devolvido = devolvido;
     }
-
-    @Override
-    public String toString() {
-        return getIdEmprestimo() + ": " + getNomePessoa() + " - ";
-    }
 }

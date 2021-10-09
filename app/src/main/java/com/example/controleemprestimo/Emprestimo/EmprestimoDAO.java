@@ -6,8 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.controleemprestimo.Equipamento.Equipamento;
-
 import java.util.List;
 
 @Dao

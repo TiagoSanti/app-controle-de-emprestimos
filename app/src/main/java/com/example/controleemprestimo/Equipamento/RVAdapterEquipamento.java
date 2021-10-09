@@ -15,14 +15,15 @@ import java.util.List;
 
 public class RVAdapterEquipamento extends RecyclerView.Adapter<RVAdapterEquipamento.ViewHolder> {
 
-    private List<Equipamento> equipamentos;
-    private OnItemListener onItemListener;
+    private final List<Equipamento> equipamentos;
+    private final OnItemListener onItemListener;
 
     public RVAdapterEquipamento(List<Equipamento> equipamentos, OnItemListener onItemListener) {
         this.equipamentos = equipamentos;
         this.onItemListener = onItemListener;
     }
 
+    @NonNull
     @Override
     public RVAdapterEquipamento.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.equipamentos_row, parent, false);

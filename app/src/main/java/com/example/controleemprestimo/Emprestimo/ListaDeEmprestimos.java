@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Equipamento.Equipamento;
@@ -35,6 +36,7 @@ public class ListaDeEmprestimos extends AppCompatActivity implements RVAdapterEm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_de_emprestimos);
+        Toast.makeText(ListaDeEmprestimos.this, "Lista de empréstimos aberta.", Toast.LENGTH_SHORT).show();
 
         db = EmpresaDB.getDatabase(getApplicationContext());
 

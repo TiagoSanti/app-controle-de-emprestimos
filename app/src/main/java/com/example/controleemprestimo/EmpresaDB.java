@@ -11,7 +11,7 @@ import com.example.controleemprestimo.Emprestimo.EmprestimoDAO;
 import com.example.controleemprestimo.Equipamento.Equipamento;
 import com.example.controleemprestimo.Equipamento.EquipamentoDAO;
 
-@Database(entities = {Emprestimo.class, Equipamento.class}, version = 1)
+@Database(entities = {Emprestimo.class, Equipamento.class}, version = 2)
 public abstract class EmpresaDB extends RoomDatabase {
     public abstract EquipamentoDAO equipamentoDAO();
     public abstract EmprestimoDAO emprestimoDAO();

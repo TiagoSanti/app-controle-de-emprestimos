@@ -1,8 +1,10 @@
 package com.example.controleemprestimo.Emprestimo;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Equipamento.Equipamento;
+import com.example.controleemprestimo.Equipamento.GerenciarEquipamento;
 import com.example.controleemprestimo.Equipamento.ListaDeEquipamentos;
 import com.example.controleemprestimo.R;
 
@@ -93,14 +96,27 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             btnAdicionarSalvar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int idEquipamento = equipamento.getIdEquipamento();
-                    String nomePessoa = edtNomePessoa.getText().toString();
-                    String telefone = edtTelefone.getText().toString();
-                    String data = edtData.getText().toString();
-                    boolean devolvido = checkDevolvido.isChecked();
+                    if(equipamento != null) {
+                        int idEquipamento = equipamento.getIdEquipamento();
+                        if(db.emprestimoDAO().getEmprEquip(idEquipamento) == null) {
+                            String nomePessoa = edtNomePessoa.getText().toString();
+                            String telefone = edtTelefone.getText().toString();
+                            String data = edtData.getText().toString();
+                            boolean devolvido = checkDevolvido.isChecked();
 
-                    db.emprestimoDAO().insertAll(new Emprestimo(idEquipamento, nomePessoa, telefone, data, devolvido));
-                    startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
+                            db.emprestimoDAO().insertAll(new Emprestimo(idEquipamento, nomePessoa, telefone, data, devolvido));
+                            startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
+                        } else {
+                            showAlertDialog(v,
+                                    "Não foi possível registrar este empréstimo. " +
+                                            "Já existe outro empréstimo vinculado à ao equipamento selecionado.");
+                        }
+                    } else {
+                        showAlertDialog(v,
+                                "Nenhum equipamento foi selecionado.\n" +
+                                        "Selecione um equipamento existente ou adicione " +
+                                        "algum antes de vinculá-lo a um empréstimo.");
+                    }
                 }
             });
         } else {
@@ -155,5 +171,22 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                 startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
             }
         });
+    }
+
+    public void showAlertDialog(View v, String text) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(GerenciarEmprestimo.this);
+
+        builder.setCancelable(true);
+        builder.setTitle("Alerta");
+        builder.setMessage(text);
+        builder.setNeutralButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        builder.create().show();
     }
 }

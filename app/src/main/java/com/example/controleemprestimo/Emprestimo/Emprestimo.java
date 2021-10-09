@@ -5,11 +5,13 @@ import static androidx.room.ForeignKey.CASCADE;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.controleemprestimo.Equipamento.Equipamento;
 
 @Entity(foreignKeys = @ForeignKey(onDelete = CASCADE,
+                                onUpdate = CASCADE,
                                 entity = Equipamento.class,
                                 parentColumns = "idEquipamento",
                                 childColumns = "idEquipamento"))
@@ -40,6 +42,7 @@ public class Emprestimo {
         this.devolvido = devolvido;
     }
 
+    @Ignore
     public Emprestimo(){
     }
 

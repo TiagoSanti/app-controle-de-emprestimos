@@ -1,14 +1,17 @@
 package com.example.controleemprestimo.Equipamento;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Emprestimo.Emprestimo;
@@ -94,8 +97,13 @@ public class GerenciarEquipamento extends AppCompatActivity {
             btnDeletar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    db.equipamentoDAO().delete(equipamento);
-                    startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
+                    emprestimo = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
+
+                    if(emprestimo != null) {
+                        showAlertDialog(v);
+                    } else {
+                        db.equipamentoDAO().delete(equipamento);
+                    }
                 }
             });
         }
@@ -106,5 +114,32 @@ public class GerenciarEquipamento extends AppCompatActivity {
                 startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
             }
         });
+    }
+
+    public void showAlertDialog(View v) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(GerenciarEquipamento.this);
+
+        builder.setCancelable(true);
+        builder.setTitle("Alerta");
+        builder.setMessage("Este equipamento está registrado em um empréstimo," +
+                " caso prossiga com a exclusão o registro de empréstimo também será excluído." +
+                " Deseja confirmar a exclusão?");
+        builder.setPositiveButton("Confirmar",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        db.equipamentoDAO().delete(equipamento);
+                        startActivity(new Intent(GerenciarEquipamento.this, ListaDeEquipamentos.class));
+                    }
+                });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        builder.create().show();
     }
 }

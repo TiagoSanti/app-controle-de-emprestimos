@@ -20,11 +20,18 @@ import java.util.List;
 
 public class RVAdapterEmprestimo extends RecyclerView.Adapter<RVAdapterEmprestimo.ViewHolder> {
 
+    private EmpresaDB db;
+
     private List<Emprestimo> emprestimos;
+    private Emprestimo emprestimo;
+
+    private Equipamento equipamento;
+
     private OnItemListener onItemListener;
 
-    public RVAdapterEmprestimo(List<Emprestimo> emprestimos, OnItemListener onItemListener) {
+    public RVAdapterEmprestimo(List<Emprestimo> emprestimos, EmpresaDB db, OnItemListener onItemListener) {
         this.emprestimos = emprestimos;
+        this.db = db;
         this.onItemListener = onItemListener;
     }
 
@@ -37,10 +44,13 @@ public class RVAdapterEmprestimo extends RecyclerView.Adapter<RVAdapterEmprestim
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RVAdapterEmprestimo.ViewHolder holder, int position) {
-        holder.txtIdEmprestimo.setText("Empréstimo #" + emprestimos.get(position).getIdEmprestimo());
-        holder.txtNomePessoa.setText("Nome do Prestatário: " + emprestimos.get(position).getNomePessoa());
+        emprestimo = emprestimos.get(position);
+        int idEquipamento = emprestimo.getIdEquipamento();
+        equipamento = db.equipamentoDAO().get(idEquipamento);
 
-        // holder.txtNomeDoEquipamento.setText("Equipamento: " + emprestimos.get(position));
+        holder.txtIdEmprestimo.setText("Empréstimo #" + emprestimo.getIdEmprestimo());
+        holder.txtNomePessoa.setText("Nome do Prestatário: " + emprestimo.getNomePessoa());
+        holder.txtNomeDoEquipamento.setText("Equipamento: " + equipamento.getNomeEquipamento());
 
         if(emprestimos.get(position).isDevolvido())
             holder.txtDevolvido.setText("Devolvido: Sim");

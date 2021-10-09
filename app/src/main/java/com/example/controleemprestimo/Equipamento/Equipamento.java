@@ -70,4 +70,11 @@ public class Equipamento {
     public void setNumPatrimonio(String numPatrimonio) {
         this.numPatrimonio = numPatrimonio;
     }
+
+    @Override
+    public String toString() {
+        return getNomeEquipamento() + " (ID #" + getIdEquipamento() + ")";
+    }
+
+
 }

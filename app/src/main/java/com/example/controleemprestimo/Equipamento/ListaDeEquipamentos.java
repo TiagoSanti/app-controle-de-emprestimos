@@ -19,6 +19,8 @@ import java.util.List;
 
 public class ListaDeEquipamentos extends AppCompatActivity implements RVAdapterEquipamento.OnItemListener {
 
+    EmpresaDB db;
+
     RecyclerView RV;
     RecyclerView.Adapter RVAdapter;
 
@@ -36,12 +38,7 @@ public class ListaDeEquipamentos extends AppCompatActivity implements RVAdapterE
         fabEquipamentos = findViewById(R.id.fabEquipamentos);
         btnVoltar = findViewById(R.id.btnVoltarListaEquip);
 
-        EmpresaDB db = Room.databaseBuilder(
-                getApplicationContext(),
-                EmpresaDB.class,
-                "EmpresaDB")
-                .allowMainThreadQueries()
-                .build();
+        db = EmpresaDB.getDatabase(getApplicationContext());
 
         equipamentos = db.equipamentoDAO().getAllEquipamentos();
 

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Gerenciar Empréstimo"
+        android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,38 +53,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTelefone" />
 
-    <Switch
-        android:id="@+id/switchDevolvido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="Devolvido"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtData" />
-
     <Spinner
         android:id="@+id/spinnerEquipamentos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@+id/txtSpinnerEquipamento"
-        app:layout_constraintTop_toBottomOf="@+id/switchDevolvido" />
+        app:layout_constraintTop_toBottomOf="@+id/checkDevolvido" />
 
     <TextView
         android:id="@+id/txtSpinnerEquipamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Equipamento: "
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchDevolvido" />
+        app:layout_constraintTop_toBottomOf="@+id/checkDevolvido" />
 
     <Button
         android:id="@+id/btnEmprAdicionarSalvar"
@@ -122,4 +111,15 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkDevolvido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="Devolvido"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtData" />
 </androidx.constraintlayout.widget.ConstraintLayout>

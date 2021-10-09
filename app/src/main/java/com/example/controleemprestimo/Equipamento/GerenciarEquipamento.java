@@ -16,6 +16,8 @@ import com.example.controleemprestimo.R;
 
 public class GerenciarEquipamento extends AppCompatActivity {
 
+    EmpresaDB db;
+
     TextView txtTitleEquipamento;
     EditText edtNomeEquipamento;
     EditText edtMarca;
@@ -39,17 +41,11 @@ public class GerenciarEquipamento extends AppCompatActivity {
         edtMarca = findViewById(R.id.edtMarca);
         edtModelo = findViewById(R.id.edtModelo);
         edtNumPatrimonio = findViewById(R.id.edtNumPatrimonio);
-
         btnDeletar = findViewById(R.id.btnEquipDeletar);
         btnAdicionarSalvar = findViewById(R.id.btnEquipAdicionarSalvar);
         btnVoltar = findViewById(R.id.btnGerenciarEquipVoltar);
 
-        EmpresaDB db = Room.databaseBuilder(
-                getApplicationContext(),
-                EmpresaDB.class,
-                "EmpresaDB")
-                .allowMainThreadQueries()
-                .build();
+        db = EmpresaDB.getDatabase(getApplicationContext());
 
         Bundle bundle = this.getIntent().getExtras();
         boolean adicionar = bundle.getBoolean("adicionar");

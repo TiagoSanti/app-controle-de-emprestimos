@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.controleemprestimo.EmpresaDB;
+import com.example.controleemprestimo.Equipamento.Equipamento;
 import com.example.controleemprestimo.MainActivity;
 import com.example.controleemprestimo.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +20,8 @@ import java.util.List;
 
 public class ListaDeEmprestimos extends AppCompatActivity implements RVAdapterEmprestimo.OnItemListener{
 
+    EmpresaDB db;
+
     RecyclerView RV;
     RecyclerView.Adapter RVAdapter;
 
@@ -26,27 +29,24 @@ public class ListaDeEmprestimos extends AppCompatActivity implements RVAdapterEm
     Button btnVoltar;
 
     List<Emprestimo> emprestimos;
+    List<Equipamento> equipamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_de_emprestimos);
 
+        db = EmpresaDB.getDatabase(getApplicationContext());
+
         RV = findViewById(R.id.RVEmprestimos);
         fabEmprestimos = findViewById(R.id.fabEmprestimos);
         btnVoltar = findViewById(R.id.btnVoltarListaEmpr);
 
-        EmpresaDB db = Room.databaseBuilder(
-                getApplicationContext(),
-                EmpresaDB.class,
-                "EmpresaDB")
-                .allowMainThreadQueries()
-                .build();
-
         emprestimos = db.emprestimoDAO().getAllEmprestimos();
+        equipamentos = db.equipamentoDAO().getAllEquipamentos();
 
         RV.setLayoutManager(new LinearLayoutManager(this));
-        RVAdapter = new RVAdapterEmprestimo(emprestimos, this);
+        RVAdapter = new RVAdapterEmprestimo(emprestimos, db, this);
         RV.setAdapter(RVAdapter);
 
         fabEmprestimos.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class ListaDeEmprestimos extends AppCompatActivity implements RVAdapterEm
 
         int idEmprestimo = emprestimos.get(position).getIdEmprestimo();
 
-        bundle.putInt("idEquipamento", idEmprestimo);
+        bundle.putInt("idEmprestimo", idEmprestimo);
         bundle.putBoolean("adicionar", false);
 
         it.putExtras(bundle);

@@ -1,5 +1,7 @@
 package com.example.controleemprestimo.Emprestimo;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -7,13 +9,15 @@ import androidx.room.PrimaryKey;
 
 import com.example.controleemprestimo.Equipamento.Equipamento;
 
-@Entity(foreignKeys = @ForeignKey(entity = Equipamento.class,
+@Entity(foreignKeys = @ForeignKey(onDelete = CASCADE,
+                                entity = Equipamento.class,
                                 parentColumns = "idEquipamento",
                                 childColumns = "idEquipamento"))
 public class Emprestimo {
     @PrimaryKey(autoGenerate = true)
     private int idEmprestimo;
 
+    @ColumnInfo
     private int idEquipamento;
 
     @ColumnInfo(name = "nome_pessoa")
@@ -28,11 +32,12 @@ public class Emprestimo {
     @ColumnInfo(name = "devolvido")
     private boolean devolvido = false;
 
-    public Emprestimo(int idEquipamento, String nomePessoa, String telefone, String data) {
+    public Emprestimo(int idEquipamento, String nomePessoa, String telefone, String data, boolean devolvido) {
         this.idEquipamento = idEquipamento;
         this.nomePessoa = nomePessoa;
         this.telefone = telefone;
         this.data = data;
+        this.devolvido = devolvido;
     }
 
     public Emprestimo(){
@@ -48,6 +53,10 @@ public class Emprestimo {
 
     public int getIdEquipamento() {
         return idEquipamento;
+    }
+
+    public void setIdEquipamento(int idEquipamento) {
+        this.idEquipamento = idEquipamento;
     }
 
     public String getNomePessoa() {

@@ -138,7 +138,6 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                 String id = "#"+idEquipamento;
 
                 if(item.contains(id)) {
-                    System.out.println("ACHOU");
                     spinnerEquipamentos.setSelection(i);
                     break;
                 }

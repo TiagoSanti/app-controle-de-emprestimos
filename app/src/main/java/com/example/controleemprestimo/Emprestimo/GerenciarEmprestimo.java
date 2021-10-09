@@ -124,11 +124,25 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             btnAdicionarSalvar.setText("Salvar");
 
             emprestimo = db.emprestimoDAO().get(bundle.getInt("idEmprestimo"));
+            int idEquipamento = emprestimo.getIdEquipamento();
+            equipamento = db.equipamentoDAO().get(idEquipamento);
 
             edtNomePessoa.setText(emprestimo.getNomePessoa());
             edtTelefone.setText(emprestimo.getTelefone());
             edtData.setText(emprestimo.getData());
             checkDevolvido.setChecked(emprestimo.isDevolvido());
+
+            for(int i = 0; i < spinnerEquipamentos.getCount(); i++) {
+                String item = spinnerEquipamentos.getItemAtPosition(i).toString();
+                System.out.println(item);
+                String id = "#"+idEquipamento;
+
+                if(item.contains(id)) {
+                    System.out.println("ACHOU");
+                    spinnerEquipamentos.setSelection(i);
+                    break;
+                }
+            }
 
             spinnerEquipamentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -138,7 +152,6 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-                    spinnerEquipamentos.setSelection(emprestimo.getIdEquipamento());
                 }
             });
 

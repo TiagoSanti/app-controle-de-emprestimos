@@ -19,6 +19,9 @@ public interface EmprestimoDAO {
     @Query("SELECT * FROM Emprestimo WHERE idEquipamento = :id LIMIT 1")
     Emprestimo getEmprEquip(int id);
 
+    @Query("SELECT * FROM Emprestimo WHERE idEquipamento = :id")
+    List<Emprestimo> getAllEmprestimosFromEquip(int id);
+
     @Insert
     void insertAll(Emprestimo... emprestimos);
 

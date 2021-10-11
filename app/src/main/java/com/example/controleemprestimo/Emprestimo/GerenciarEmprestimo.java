@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.health.SystemHealthManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +27,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
     List<Equipamento> equipamentos;
     Equipamento equipamento;
+    List<Emprestimo> emprestimos;
     Emprestimo emprestimo, emprAuxiliar;
 
     TextView txtTitleEmprestimo;
@@ -76,9 +76,17 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             equipamentos = db.equipamentoDAO().getAllEquipamentos();
             for(int i = 0; i < equipamentos.size(); i++) {
                 equipamento = equipamentos.get(i);
-                emprAuxiliar = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
 
-                if(emprAuxiliar != null && !emprAuxiliar.isDevolvido()) {
+                emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(equipamento.getIdEquipamento());
+                boolean todosDevolvidos = true;
+                for(int j = 0; j < emprestimos.size(); j++) {
+                    if(!emprestimos.get(j).isDevolvido()) {
+                        todosDevolvidos = false;
+                        break;
+                    }
+                }
+
+                if(emprestimos != null && !todosDevolvidos) {
                     equipamentos.remove(i);
                     i = i-1;
                 }
@@ -113,7 +121,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                         db.emprestimoDAO().insertAll(new Emprestimo(idEquipamento, nomePessoa, telefone, data, devolvido));
                         startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
                     } else {
-                        showAlertDialog(v,
+                        showAlertDialog(
                                 "Nenhum equipamento foi selecionado.\n" +
                                         "Selecione um equipamento existente ou adicione " +
                                         "algum antes de vinculá-lo a um empréstimo.");
@@ -126,7 +134,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
             emprestimo = db.emprestimoDAO().get(bundle.getInt("idEmprestimo"));
             int idEquipamento = emprestimo.getIdEquipamento();
-            int spinnerIndexShow = -1;
+            int spinnerIndexShow = 0;
             equipamento = db.equipamentoDAO().get(idEquipamento);
 
             edtNomePessoa.setText(emprestimo.getNomePessoa());
@@ -137,15 +145,19 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             equipamentos = db.equipamentoDAO().getAllEquipamentos();
             for(int i = 0; i < equipamentos.size(); i++) {
                 equipamento = equipamentos.get(i);
-                emprAuxiliar = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
+                emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(equipamento.getIdEquipamento());
 
-                if(emprAuxiliar != null && !emprAuxiliar.isDevolvido()) {
-                    if(equipamentos.get(i).getIdEquipamento() != idEquipamento) {
-                        equipamentos.remove(i);
-                        i -= 1;
+                boolean todosDevolvidos = true;
+                for(int j = 0; j < emprestimos.size(); j++) {
+                    if(!emprestimos.get(j).isDevolvido()) {
+                        todosDevolvidos = false;
+                        break;
                     }
-                    else
-                        spinnerIndexShow = i;
+                }
+
+                if(emprestimos != null && !todosDevolvidos && equipamento.getIdEquipamento() != idEquipamento) {
+                    equipamentos.remove(i);
+                    i = i - 1;
                 }
             }
 
@@ -153,6 +165,13 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                     R.layout.support_simple_spinner_dropdown_item,
                     equipamentos);
             spinnerEquipamentos.setAdapter(adapter);
+
+            for(int i = 0; i < spinnerEquipamentos.getCount(); i++) {
+                if(spinnerEquipamentos.getItemAtPosition(i).toString().contains("#"+emprestimo.getIdEquipamento()+")")) {
+                    spinnerIndexShow = i;
+                    break;
+                }
+            }
             spinnerEquipamentos.setSelection(spinnerIndexShow);
 
             spinnerEquipamentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -169,14 +188,30 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             btnAdicionarSalvar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    emprestimo.setIdEquipamento(equipamento.getIdEquipamento());
-                    emprestimo.setNomePessoa(edtNomePessoa.getText().toString());
-                    emprestimo.setTelefone(edtTelefone.getText().toString());
-                    emprestimo.setData(edtData.getText().toString());
-                    emprestimo.setDevolvido(checkDevolvido.isChecked());
+                    emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(equipamento.getIdEquipamento());
+                    boolean todosDevolvidos = true;
+                    for(int j = 0; j < emprestimos.size(); j++) {
+                        if(!emprestimos.get(j).isDevolvido()) {
+                            todosDevolvidos = false;
+                            break;
+                        }
+                    }
 
-                    db.emprestimoDAO().update(emprestimo);
-                    startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
+                    if(!todosDevolvidos && !checkDevolvido.isChecked()) {
+                        showAlertDialog("Existe um registro de empréstimo em que o equipamento" +
+                                " selecionado não foi devolvido, portanto, não é possível atribuí-lo" +
+                                " a outro registro de empréstimo.");
+                        checkDevolvido.setChecked(true);
+                    } else {
+                        emprestimo.setIdEquipamento(equipamento.getIdEquipamento());
+                        emprestimo.setNomePessoa(edtNomePessoa.getText().toString());
+                        emprestimo.setTelefone(edtTelefone.getText().toString());
+                        emprestimo.setData(edtData.getText().toString());
+                        emprestimo.setDevolvido(checkDevolvido.isChecked());
+
+                        db.emprestimoDAO().update(emprestimo);
+                        startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
+                    }
                 }
             });
 
@@ -197,7 +232,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
         });
     }
 
-    public void showAlertDialog(View v, String text) {
+    public void showAlertDialog(String text) {
         AlertDialog.Builder builder = new AlertDialog.Builder(GerenciarEmprestimo.this);
 
         builder.setCancelable(true);

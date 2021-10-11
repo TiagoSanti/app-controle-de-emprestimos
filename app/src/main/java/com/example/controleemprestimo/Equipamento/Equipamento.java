@@ -1,8 +1,10 @@
 package com.example.controleemprestimo.Equipamento;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -73,10 +75,9 @@ public class Equipamento {
         this.numPatrimonio = numPatrimonio;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return getNomeEquipamento() + " (ID #" + getIdEquipamento() + ")";
     }
-
-
 }

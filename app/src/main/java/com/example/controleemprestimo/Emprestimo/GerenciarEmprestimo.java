@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.health.SystemHealthManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,9 +26,9 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
     EmpresaDB db;
 
-    List<Equipamento> equipamentos;
+    List<Equipamento> equipamentos, allEquipamentos;
     Equipamento equipamento;
-    Emprestimo emprestimo;
+    Emprestimo emprestimo, emprAuxiliar;
 
     TextView txtTitleEmprestimo;
     TextView txtSpinnerEquipamento;
@@ -63,12 +64,6 @@ public class GerenciarEmprestimo extends AppCompatActivity {
         btnVoltar = findViewById(R.id.btnGerenciarEmprVoltar);
 
         db = EmpresaDB.getDatabase(getApplicationContext());
-        equipamentos = db.equipamentoDAO().getAllEquipamentos();
-
-        adapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item,
-                equipamentos);
-        spinnerEquipamentos.setAdapter(adapter);
 
         Bundle bundle = this.getIntent().getExtras();
         boolean adicionar = bundle.getBoolean("adicionar");
@@ -77,6 +72,22 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             txtTitleEmprestimo.setText("Adicionar Empréstimo");
             btnAdicionarSalvar.setText("Adicionar");
             btnDeletar.setVisibility(View.INVISIBLE);
+
+            equipamentos = db.equipamentoDAO().getAllEquipamentos();
+            for(int i = 0; i < equipamentos.size(); i++) {
+                equipamento = equipamentos.get(i);
+                emprAuxiliar = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
+
+                if(emprAuxiliar != null && !emprAuxiliar.isDevolvido()) {
+                    equipamentos.remove(i);
+                    i = i-1;
+                }
+            }
+
+            adapter = new ArrayAdapter<>(this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    equipamentos);
+            spinnerEquipamentos.setAdapter(adapter);
 
             spinnerEquipamentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -94,19 +105,13 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                 public void onClick(View v) {
                     if(equipamento != null) {
                         int idEquipamento = equipamento.getIdEquipamento();
-                        if(db.emprestimoDAO().getEmprEquip(idEquipamento) == null) {
-                            String nomePessoa = edtNomePessoa.getText().toString();
-                            String telefone = edtTelefone.getText().toString();
-                            String data = edtData.getText().toString();
-                            boolean devolvido = checkDevolvido.isChecked();
+                        String nomePessoa = edtNomePessoa.getText().toString();
+                        String telefone = edtTelefone.getText().toString();
+                        String data = edtData.getText().toString();
+                        boolean devolvido = checkDevolvido.isChecked();
 
-                            db.emprestimoDAO().insertAll(new Emprestimo(idEquipamento, nomePessoa, telefone, data, devolvido));
-                            startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
-                        } else {
-                            showAlertDialog(v,
-                                    "Não foi possível registrar este empréstimo. " +
-                                            "Já existe outro empréstimo vinculado à ao equipamento selecionado.");
-                        }
+                        db.emprestimoDAO().insertAll(new Emprestimo(idEquipamento, nomePessoa, telefone, data, devolvido));
+                        startActivity(new Intent(GerenciarEmprestimo.this, ListaDeEmprestimos.class));
                     } else {
                         showAlertDialog(v,
                                 "Nenhum equipamento foi selecionado.\n" +
@@ -116,11 +121,12 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                 }
             });
         } else {
-            txtTitleEmprestimo.setText("Editar Equipamento");
+            txtTitleEmprestimo.setText("Editar Empréstimo");
             btnAdicionarSalvar.setText("Salvar");
 
             emprestimo = db.emprestimoDAO().get(bundle.getInt("idEmprestimo"));
             int idEquipamento = emprestimo.getIdEquipamento();
+            int spinnerIndexShow = -1;
             equipamento = db.equipamentoDAO().get(idEquipamento);
 
             edtNomePessoa.setText(emprestimo.getNomePessoa());
@@ -128,16 +134,26 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             edtData.setText(emprestimo.getData());
             checkDevolvido.setChecked(emprestimo.isDevolvido());
 
-            for(int i = 0; i < spinnerEquipamentos.getCount(); i++) {
-                String item = spinnerEquipamentos.getItemAtPosition(i).toString();
-                System.out.println(item);
-                String id = "#"+idEquipamento;
+            equipamentos = db.equipamentoDAO().getAllEquipamentos();
+            for(int i = 0; i < equipamentos.size(); i++) {
+                equipamento = equipamentos.get(i);
+                emprAuxiliar = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
 
-                if(item.contains(id)) {
-                    spinnerEquipamentos.setSelection(i);
-                    break;
+                if(emprAuxiliar != null && !emprAuxiliar.isDevolvido()) {
+                    if(equipamentos.get(i).getIdEquipamento() != idEquipamento) {
+                        equipamentos.remove(i);
+                        i -= 1;
+                    }
+                    else
+                        spinnerIndexShow = i;
                 }
             }
+
+            adapter = new ArrayAdapter<>(this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    equipamentos);
+            spinnerEquipamentos.setAdapter(adapter);
+            spinnerEquipamentos.setSelection(spinnerIndexShow);
 
             spinnerEquipamentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

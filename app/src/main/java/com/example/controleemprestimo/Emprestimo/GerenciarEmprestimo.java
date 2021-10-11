@@ -26,7 +26,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
 
     EmpresaDB db;
 
-    List<Equipamento> equipamentos, allEquipamentos;
+    List<Equipamento> equipamentos;
     Equipamento equipamento;
     Emprestimo emprestimo, emprAuxiliar;
 

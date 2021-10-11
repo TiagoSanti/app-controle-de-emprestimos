@@ -27,7 +27,7 @@ public class ListaDeEquipamentos extends AppCompatActivity implements RVAdapterE
     FloatingActionButton fabEquipamentos;
     Button btnVoltar;
 
-    List<Equipamento> equipamentos, allEquipamentos;
+    List<Equipamento> equipamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

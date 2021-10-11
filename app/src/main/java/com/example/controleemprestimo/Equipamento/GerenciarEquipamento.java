@@ -15,6 +15,8 @@ import com.example.controleemprestimo.EmpresaDB;
 import com.example.controleemprestimo.Emprestimo.Emprestimo;
 import com.example.controleemprestimo.R;
 
+import java.util.List;
+
 public class GerenciarEquipamento extends AppCompatActivity {
 
     EmpresaDB db;
@@ -29,7 +31,7 @@ public class GerenciarEquipamento extends AppCompatActivity {
     Button btnAdicionarSalvar;
     Button btnVoltar;
 
-    Emprestimo emprestimo;
+    List<Emprestimo> emprestimos;
     Equipamento equipamento;
 
     @Override
@@ -95,9 +97,9 @@ public class GerenciarEquipamento extends AppCompatActivity {
             btnDeletar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    emprestimo = db.emprestimoDAO().getEmprEquip(equipamento.getIdEquipamento());
+                    emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(equipamento.getIdEquipamento());
 
-                    if(emprestimo != null) {
+                    if(emprestimos != null) {
                         showAlertDialog(v);
                     } else {
                         db.equipamentoDAO().delete(equipamento);
@@ -120,8 +122,8 @@ public class GerenciarEquipamento extends AppCompatActivity {
 
         builder.setCancelable(true);
         builder.setTitle("Alerta");
-        builder.setMessage("Este equipamento está registrado em um empréstimo," +
-                " caso prossiga com a exclusão o registro de empréstimo também será excluído." +
+        builder.setMessage("Este equipamento está registrado em, pelo menos, um empréstimo," +
+                " caso prossiga com a exclusão o(s) registro(s) de empréstimo também será(ão) excluído(s)." +
                 " Deseja confirmar a exclusão?");
         builder.setPositiveButton("Confirmar",
                 new DialogInterface.OnClickListener() {

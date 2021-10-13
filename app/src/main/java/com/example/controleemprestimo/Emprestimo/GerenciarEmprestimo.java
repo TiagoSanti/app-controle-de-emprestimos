@@ -28,7 +28,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
     List<Equipamento> equipamentos;
     Equipamento equipamento;
     List<Emprestimo> emprestimos;
-    Emprestimo emprestimo, emprAuxiliar;
+    Emprestimo emprestimo;
 
     TextView txtTitleEmprestimo;
     TextView txtSpinnerEquipamento;
@@ -111,8 +111,10 @@ public class GerenciarEmprestimo extends AppCompatActivity {
             btnAdicionarSalvar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(equipamento != null) {
-                        int idEquipamento = equipamento.getIdEquipamento();
+                    int idEquipamento = equipamento.getIdEquipamento();
+
+                    emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(idEquipamento);
+                    if(emprestimos.size() == 0) {
                         String nomePessoa = edtNomePessoa.getText().toString();
                         String telefone = edtTelefone.getText().toString();
                         String data = edtData.getText().toString();
@@ -125,7 +127,7 @@ public class GerenciarEmprestimo extends AppCompatActivity {
                                 "Nenhum equipamento foi selecionado.\n" +
                                         "Selecione um equipamento existente ou adicione " +
                                         "algum antes de vinculá-lo a um empréstimo.");
-                    }
+                        }
                 }
             });
         } else {

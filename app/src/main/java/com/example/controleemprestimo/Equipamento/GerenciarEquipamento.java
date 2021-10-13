@@ -98,8 +98,9 @@ public class GerenciarEquipamento extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     emprestimos = db.emprestimoDAO().getAllEmprestimosFromEquip(equipamento.getIdEquipamento());
+                    System.out.println(emprestimos.size());
 
-                    if(emprestimos != null) {
+                    if(emprestimos.size() != 0) {
                         showAlertDialog(v);
                     } else {
                         db.equipamentoDAO().delete(equipamento);
